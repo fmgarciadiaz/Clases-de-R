@@ -10,7 +10,6 @@
 "%+%" <- function(x,y) paste(x,y,sep="") # se define %+% como concatenacion
 
 # Elegir WD para acceder a archivos
-getwd()
 data_dir <- getwd() %+% "/data/"
 results_dir <- getwd() %+% "/results/"
 
