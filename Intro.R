@@ -1,5 +1,6 @@
 # ******************************************
-# Clase de R: Conceptos básicos
+# Clase de R: 
+# 1. Conceptos básicos
 # Ejemplo #1
 # Este es un script de R
 # <- el # define comentarios

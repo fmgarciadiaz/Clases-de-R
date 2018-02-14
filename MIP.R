@@ -1,5 +1,6 @@
 # ************************************************************
-# Clase de R: 4 - Obtener multiplicadores de empleo
+# Clase de R: 
+# 3 - Obtener multiplicadores de empleo
 # FERGD 1/2017
 # ************************************************************
 
