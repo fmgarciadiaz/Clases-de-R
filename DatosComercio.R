@@ -46,14 +46,14 @@ summary(Datos)
 Datos$value                  #<- distintas formas de acceder a la misma columna
 Datos["value"]               #<- distintas formas de acceder a la misma columna
 Datos[6]                     #<- distintas formas de acceder a la misma columna
-sum(Datos$value)/1000000     # Prueba rápida: suma de impos totales
+Mtotal <- sum(Datos$value)/1000000     # Prueba rápida: suma de impos totales
 
 # funciones importantes de DPLYR: select, filter, group_by, summarise
 select(Datos,value)          # seleccionar columnas
 filter(Datos, month == "01") # filtrar filas
 
 # Gramatica de DPLYR: concatenar las funciones para pasos sucesivos
-Datos %>% filter(month =="01") %>% select(value) %>% sum()/1000000
+Resultado <- Datos %>% dplyr::filter(month =="01") %>% select(value) %>% sum()/1000000
 
 # **************************************
 # EMPALMO LOS DATOS (PASO IMPORTANTE!!!)  <siempre chequear que sea correcto
@@ -66,7 +66,17 @@ print("Cargados " %+% length(Datos$year) %+% " datos")
 print("Registros sin match: " %+% sum(is.na(Datos$ncm_desc)) %+% " (" %+% percent(sum(is.na(Datos$ncm_desc))/length(Datos$year)) %+% ")")
 
 # Resumen y manipulacion de datos: group_by , summarise y mutate
-totales.mensuales <- Datos %>% select(month, value) %>% group_by(month) %>% summarise(impos = sum(value)) %>%
-  mutate(impos_mill = expos/1000000)
+totales.mensuales <- Datos %>% select(month, value, kg) %>% group_by(month) %>% summarise(impos = sum(value)) %>% mutate(impos_mill = impos/1000000)
 
 total.rubros <- Datos %>% select(value, rubro_cod_let) %>% group_by(rubro_cod_let) %>% summarise(M = sum(value) / 1000000)
+
+# --------------------------------------
+# 3. GRAFICOS BASE 
+# --------------------------------------
+
+
+plot(totales.mensuales)                     # Plot intenta acomodar el grafico al objeto que se le pasa
+plot(totales.mensuales$month,totales.mensuales$impos_mill, "b", main = "Exportaciones 2017", sub = "Por Mes",
+     xlab = "mes" , ylab = "USD millones")  # Pero en general hay que pasar parámetros
+
+
